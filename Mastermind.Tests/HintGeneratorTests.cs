@@ -11,31 +11,31 @@ namespace Mastermind.Tests
         [Test]
         public void Test_AllCorrect()
         {
-            Assert.That(HintGenerator.GeneratorHint("1234", "1234"), Is.EqualTo("++++"));
+            Assert.That(HintGenerator.GenerateHint("1234", "1234"), Is.EqualTo("++++"));
         }
 
         [Test]
         public void Test_AllIncorrect()
         {
-            Assert.That(HintGenerator.GeneratorHint("1234", "5566"), Is.EqualTo(""));
+            Assert.That(HintGenerator.GenerateHint("1234", "5566"), Is.EqualTo(""));
         }
 
         [Test]
         public void Test_SomeCorrect()
         {
-            Assert.That(HintGenerator.GeneratorHint("1234", "1243"), Is.EqualTo("++--"));
+            Assert.That(HintGenerator.GenerateHint("1234", "1243"), Is.EqualTo("++--"));
         }
 
         [Test]
         public void Test_AllCorrectJustInWrongPositions()
         {
-            Assert.That(HintGenerator.GeneratorHint("1234", "4321"), Is.EqualTo("----"));
+            Assert.That(HintGenerator.GenerateHint("1234", "4321"), Is.EqualTo("----"));
         }
 
         [Test]
         public void Test_ExampleFromDirections()
         {
-            Assert.That(HintGenerator.GeneratorHint("1234", "4233"), Is.EqualTo("++-"));
+            Assert.That(HintGenerator.GenerateHint("1234", "4233"), Is.EqualTo("++-"));
         }
     }
 }

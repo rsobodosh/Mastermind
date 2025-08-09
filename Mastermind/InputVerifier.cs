@@ -2,9 +2,9 @@
 {
     public class InputVerifier
     {
-        public static (bool passed, string message) VerifyUserInput(string inputString)
+        public static (bool valid, string message) VerifyUserInput(string? inputString)
         {
-            var passed = true;
+            var valid = true;
             var messages = new List<string>();
 
             if (string.IsNullOrWhiteSpace(inputString))
@@ -14,31 +14,31 @@
 
             if (inputString.Length > 4)
             {
-                passed = false;
+                valid = false;
                 messages.Add("Input was longer than 4 characters. Input must be 4 characters in length.");
             }
 
             if (inputString.Length < 4)
             {
-                passed = false;
+                valid = false;
                 messages.Add("Input was shorter than 4 characters. Input must be 4 characters in length.");
             }
 
             if (!int.TryParse(inputString, out _))
             {
-                passed = false;
+                valid = false;
                 messages.Add("Input must only contain digits ranging from 1 to 6.");
             }
             else
             {
                 if (inputString.Any(c => c < '1' || c > '6'))
                 {
-                    passed = false;
+                    valid = false;
                     messages.Add("Input must only contain digits ranging from 1 to 6.");
                 }
             }
 
-            return (passed, string.Join(" ", messages));
+            return (valid, string.Join(" ", messages));
         }
     }
 }

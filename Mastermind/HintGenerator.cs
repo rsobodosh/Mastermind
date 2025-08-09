@@ -2,7 +2,9 @@
 {
     public class HintGenerator
     {
-        public static string GeneratorHint(string secretAnswer, string input)
+        public const int MAX_NUM_CHARS = 4;
+
+        public static string GenerateHint(string secretAnswer, string input)
         {
             var hint = AddPlusSymbols(secretAnswer, input);
             hint = AddMinusSymbols(secretAnswer, input, hint);
@@ -10,11 +12,11 @@
             return string.Join("", hint.Values);
         }
 
-        public static Dictionary<char, string> AddPlusSymbols(string secretAnswer, string input)
+        private static Dictionary<char, string> AddPlusSymbols(string secretAnswer, string input)
         {
             Dictionary<char, string> hint = new Dictionary<char, string>();
 
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < MAX_NUM_CHARS; i++)
             {
                 if (input[i] == secretAnswer[i] && !hint.ContainsKey(input[i]))
                 {
@@ -25,7 +27,7 @@
             return hint;
         }
 
-        public static Dictionary<char, string> AddMinusSymbols(string secretAnswer, string input, Dictionary<char, string> hint)
+        private static Dictionary<char, string> AddMinusSymbols(string secretAnswer, string input, Dictionary<char, string> hint)
         {
             foreach (char c in input)
             {
