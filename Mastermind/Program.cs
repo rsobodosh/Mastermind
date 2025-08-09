@@ -1,29 +1,36 @@
-﻿namespace Mastermind
+﻿using System.Text;
+
+namespace Mastermind
 {
     public class Program
     {
-        public static int MAX_NUM_ATTEMPTS = 10;
-
         public static string SecretAnswer { get; set; } = String.Empty;
 
         public static void InitializeSecretAnswer()
         {
             Random random = new Random();
-            SecretAnswer = string.Join("", Enumerable.Range(0, 4).Select(_ => random.Next(1, 7).ToString()));
+            StringBuilder sb = new StringBuilder();
+
+            for (int i = 1; i <= Common.MAX_NUM_CHARS; i++)
+            {
+                sb.Append(random.Next(1, 7));
+            }
+
+            SecretAnswer = sb.ToString();
         }
 
         public static void Main(string[] args)
         {
-            int attempts = 1;
+            int attempt = 1;
             bool won = false;
 
             InitializeSecretAnswer();
 
             Console.WriteLine("Welcome to the Mastermind game!");
 
-            while (attempts <= MAX_NUM_ATTEMPTS)
+            while (attempt <= Common.MAX_NUM_ATTEMPTS)
             {
-                Console.WriteLine($"Attempt {attempts} of {MAX_NUM_ATTEMPTS} | Enter your guess (4 digits with each digit ranging from 1 to 6):");
+                Console.WriteLine($"Attempt {attempt} of {Common.MAX_NUM_ATTEMPTS} | Enter your guess ({Common.MAX_NUM_CHARS} digits with each digit ranging from {Common.MIN_CHAR} to {Common.MAX_CHAR}):");
 
                 string? input = Console.ReadLine();
 
@@ -46,7 +53,7 @@
                     Console.WriteLine(message);
                 }
 
-                attempts++;
+                attempt++;
             }
 
             if (won)
@@ -55,7 +62,7 @@
             }
             else
             {
-                Console.WriteLine(String.Format("Sorry, you were unable to guess the secret answer which was {0}.", SecretAnswer));
+                Console.WriteLine($"Sorry, you were unable to guess the secret answer which was {SecretAnswer}.");
             }
         }
     }

@@ -2,8 +2,6 @@
 {
     public class HintGenerator
     {
-        public const int MAX_NUM_CHARS = 4;
-
         public static string GenerateHint(string secretAnswer, string input)
         {
             var hint = AddPlusSymbols(secretAnswer, input);
@@ -16,7 +14,7 @@
         {
             Dictionary<char, string> hint = new Dictionary<char, string>();
 
-            for (int i = 0; i < MAX_NUM_CHARS; i++)
+            for (int i = 0; i < Common.MAX_NUM_CHARS; i++)
             {
                 if (input[i] == secretAnswer[i] && !hint.ContainsKey(input[i]))
                 {
